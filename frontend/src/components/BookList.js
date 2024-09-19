@@ -6,6 +6,8 @@ import Modal from './Modal';
 import { IoAdd } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -15,6 +17,8 @@ const BookList = () => {
   const { logout } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [hasMoreBooks, setHasMoreBooks] = useState(true); // New state to track availability of more books
+  const [totalBooks, setTotalBooks] = useState(0); 
   const [editFormData, setEditFormData] = useState({
     title: '',
     author: '',
@@ -27,6 +31,8 @@ const BookList = () => {
         const params = { search: searchTerm, page, limit: 5 };
         const res = await getBooks(params);
         setBooks(res.data.books || []);
+        setTotalBooks(res.data.totalBooks);
+        setHasMoreBooks(res.data.books.length === 5); 
       } catch (error) {
         console.error('Error fetching books:', error);
         setBooks([]);
@@ -35,6 +41,12 @@ const BookList = () => {
 
     fetchBooks();
   }, [searchTerm, page]);
+
+  const handleNextPage = () => {
+    if (hasMoreBooks) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -171,14 +183,17 @@ const BookList = () => {
               page === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
             } text-white font-semibold py-2 px-4 rounded-lg transition duration-300`}
           >
-            Previous
+            <FaAngleLeft />
           </button>
           <span className="text-gray-600">Page {page}</span>
           <button
-            onClick={() => setPage((prev) => prev + 1)}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+            onClick={handleNextPage} // Call the next page handler
+            disabled={!hasMoreBooks} // Disable if no more books are available
+            className={`${
+              !hasMoreBooks ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
+            } text-white font-semibold py-2 px-4 rounded-lg transition duration-300`}
           >
-            Next
+           <FaAngleRight />
           </button>
         </div>
 
