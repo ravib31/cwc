@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createBook } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const BookForm = () => {
   const [formData, setFormData] = useState({
@@ -30,11 +31,11 @@ const BookForm = () => {
 
       // Send data to backend
       await createBook(formData, token);
-      alert('Book added successfully');
+      toast.success('Book added successfully!'); 
       navigate('/books'); // Redirect to book list after submission
     } catch (error) {
       console.error('Error adding book:', error.response ? error.response.data : error.message);
-      alert('Failed to add book');
+      toast.error('Failed to add book');
     }
   };
 

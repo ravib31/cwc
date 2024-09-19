@@ -1,5 +1,7 @@
 // src/App.js
 import React, { useContext } from 'react';
+import { ToastContainer } from 'react-toastify'; // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; 
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { AuthContext, AuthProvider } from './context/AuthContext';
 import Register from './components/Register';
@@ -23,6 +25,18 @@ const App = () => {
           <Route path="/book/:id?" element={<ProtectedRoute element={BookForm} />} /> {/* Protect this route */}
         </Routes>
         <Footer/>
+        <ToastContainer 
+  position="bottom-right"
+  autoClose={3000}
+  hideProgressBar={false}
+  newestOnTop={false}
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover
+/>
+
       </Router>
     </AuthProvider>
   );

@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { loginUser } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -18,10 +19,10 @@ const Login = () => {
     try {
       const res = await loginUser(formData);
       login(res.data.token);
-      alert('Login successful');
+      toast.success('Login successful');
       navigate('/books');
     } catch (error) {
-      alert('Error logging in');
+      toast.error('Error logging in');
     }
   };
 

@@ -66,10 +66,10 @@ const Register = () => {
         </form>
         <p className="text-center mt-4 text-gray-600">
           If you are not a registered user,{" "}
-          <Link to="/register" className="text-indigo-600 hover:underline">
+          <Link to="/login" className="text-indigo-600 hover:underline">
             click here
           </Link>{" "}
-          to Register.
+          to Login.
         </p>
       </div>
     </div>

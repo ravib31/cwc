@@ -8,6 +8,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -58,7 +59,9 @@ const BookList = () => {
 
   const handleLogout = () => {
     logout(); // Clear the token and log out
-    navigate('/login'); // Redirect to login page after logout
+    toast.success("Logout Successful")
+    navigate('/login'); 
+    // Redirect to login page after logout
   };
 
   const handleDeleteBook = async (id) => {
@@ -67,10 +70,10 @@ const BookList = () => {
       try {
         await deleteBook(id, token); // Pass the token to the API call
         setBooks(books.filter((book) => book._id !== id)); // Remove the deleted book from state
-        alert('Book deleted successfully.');
+        toast.success('Book deleted successfully.');
       } catch (error) {
         console.error('Error deleting book:', error.response ? error.response.data : error.message);
-        alert('Failed to delete the book.');
+        toast.error('Failed to delete the book.');
       }
     }
   };
@@ -93,7 +96,7 @@ const BookList = () => {
   
     try {
       await updateBook(selectedBook._id, editFormData, token); // Pass the token along with book data
-      alert('Book updated successfully.');
+      toast.success('Book updated successfully.');
       setIsModalOpen(false);  // Close the modal
       // Update book list with the edited data
       setBooks(
@@ -103,7 +106,7 @@ const BookList = () => {
       );
     } catch (error) {
       console.error('Error updating book:', error.response ? error.response.data : error.message);
-      alert('Failed to update the book.');
+      toast.error('Failed to update the book.');
     }
   };
 
