@@ -1,4 +1,3 @@
-// src/components/Login.js
 import React, { useState, useContext } from 'react';
 import { loginUser } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
@@ -20,7 +19,7 @@ const Login = () => {
       const res = await loginUser(formData);
       login(res.data.token);
       toast.success('Login successful');
-      navigate('/books');
+      navigate('/');
     } catch (error) {
       toast.error('Error logging in');
     }

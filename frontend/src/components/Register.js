@@ -1,7 +1,7 @@
-// src/components/Register.js
 import React, { useState } from 'react';
 import { registerUser } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -15,10 +15,10 @@ const Register = () => {
     e.preventDefault();
     try {
       await registerUser(formData);
-      alert('Registration successful');
+      toast.success('Registration successful');
       navigate('/login');
     } catch (error) {
-      alert('Error registering user');
+      toast.error('Error registering user');
     }
   };
 

@@ -1,4 +1,3 @@
-// src/components/Header.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -10,30 +9,11 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-blue-600 text-white shadow-lg">
+    <header className="bg-gray-900 text-gray-400  shadow-lg">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo */}
         <div className="text-2xl font-bold">
-          <Link to="/">MyLogo</Link>
+          <Link to="/">Hye Buddy</Link>
         </div>
-
-        {/* Nav Links for larger screens */}
-        <nav className="hidden md:flex space-x-6">
-          <Link to="/" className="hover:text-gray-200">
-            Home
-          </Link>
-          <Link to="/about" className="hover:text-gray-200">
-            About
-          </Link>
-          <Link to="/services" className="hover:text-gray-200">
-            Services
-          </Link>
-          <Link to="/contact" className="hover:text-gray-200">
-            Contact
-          </Link>
-        </nav>
-
-        {/* Hamburger Menu for mobile screens */}
         <div className="md:hidden">
           <button onClick={toggleMenu} className="focus:outline-none">
             <svg
@@ -54,43 +34,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`${
-          isOpen ? 'block' : 'hidden'
-        } md:hidden bg-blue-500 text-white shadow-md`}
-      >
-        <nav className="px-4 pt-2 pb-4 space-y-2">
-          <Link
-            to="/"
-            className="block py-2 hover:bg-blue-700 rounded-lg"
-            onClick={toggleMenu}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            className="block py-2 hover:bg-blue-700 rounded-lg"
-            onClick={toggleMenu}
-          >
-            About
-          </Link>
-          <Link
-            to="/services"
-            className="block py-2 hover:bg-blue-700 rounded-lg"
-            onClick={toggleMenu}
-          >
-            Services
-          </Link>
-          <Link
-            to="/contact"
-            className="block py-2 hover:bg-blue-700 rounded-lg"
-            onClick={toggleMenu}
-          >
-            Contact
-          </Link>
-        </nav>
-      </div>
+     
     </header>
   );
 };

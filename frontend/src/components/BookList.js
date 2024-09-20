@@ -54,22 +54,22 @@ const BookList = () => {
   };
 
   const handleAddNewBook = () => {
-    navigate('/book'); // Navigate to Add New Book page
+    navigate('/book'); 
   };
 
   const handleLogout = () => {
-    logout(); // Clear the token and log out
+    logout(); 
     toast.success("Logout Successful")
     navigate('/login'); 
-    // Redirect to login page after logout
+   
   };
 
   const handleDeleteBook = async (id) => {
-    const token = localStorage.getItem('token'); // Ensure the token is fetched from storage
+    const token = localStorage.getItem('token'); 
     if (window.confirm('Are you sure you want to delete this book?')) {
       try {
-        await deleteBook(id, token); // Pass the token to the API call
-        setBooks(books.filter((book) => book._id !== id)); // Remove the deleted book from state
+        await deleteBook(id, token);
+        setBooks(books.filter((book) => book._id !== id)); 
         toast.success('Book deleted successfully.');
       } catch (error) {
         console.error('Error deleting book:', error.response ? error.response.data : error.message);
@@ -79,26 +79,25 @@ const BookList = () => {
   };
 
   const handleEditBook = async (id) => {
-    const token = localStorage.getItem('token'); // Get token for authentication
+    const token = localStorage.getItem('token'); 
     try {
-      const res = await getBookById(id, token); // Fetch book details by ID
+      const res = await getBookById(id, token); 
       const book = res.data;
-      setSelectedBook(book); // Set selected book
-      setEditFormData({ title: book.title, author: book.author, genre: book.genre }); // Pre-fill form
-      setIsModalOpen(true); // Open modal
+      setSelectedBook(book); 
+      setEditFormData({ title: book.title, author: book.author, genre: book.genre }); 
+      setIsModalOpen(true); 
     } catch (error) {
       console.error('Error fetching book data:', error);
     }
   };
 
   const handleUpdateBook = async () => {
-    const token = localStorage.getItem('token'); // Retrieve the token
+    const token = localStorage.getItem('token'); 
   
     try {
-      await updateBook(selectedBook._id, editFormData, token); // Pass the token along with book data
+      await updateBook(selectedBook._id, editFormData, token); 
       toast.success('Book updated successfully.');
-      setIsModalOpen(false);  // Close the modal
-      // Update book list with the edited data
+      setIsModalOpen(false); 
       setBooks(
         books.map((book) =>
           book._id === selectedBook._id ? { ...book, ...editFormData } : book
@@ -117,7 +116,6 @@ const BookList = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 p-6">
       <div className="container mx-auto">
-        {/* Buttons for Add New Book and Logout */}
         <div className="mb-8 flex justify-end space-x-4">
           <button
             onClick={handleAddNewBook}
@@ -133,7 +131,7 @@ const BookList = () => {
           </button>
         </div>
 
-        {/* Single Search Bar */}
+        
         <div className="mb-6">
           <input
             type="text"
@@ -143,8 +141,6 @@ const BookList = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
-
-        {/* Guard against null or undefined books */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <ul className="divide-y divide-gray-200">
             {Array.isArray(books) && books.length > 0 ? (
@@ -157,7 +153,7 @@ const BookList = () => {
                   </div>
                   <div className="flex space-x-2">
                     <button
-                      onClick={() => handleEditBook(book._id)} // Open modal for edit
+                      onClick={() => handleEditBook(book._id)} 
                       className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded-lg transition duration-300"
                     >
                       <FaRegEdit />
@@ -176,8 +172,6 @@ const BookList = () => {
             )}
           </ul>
         </div>
-
-        {/* Pagination */}
         <div className="flex justify-between items-center mt-8">
           <button
             onClick={() => setPage((prev) => prev - 1)}
@@ -190,8 +184,8 @@ const BookList = () => {
           </button>
           <span className="text-gray-600">Page {page}</span>
           <button
-            onClick={handleNextPage} // Call the next page handler
-            disabled={!hasMoreBooks} // Disable if no more books are available
+            onClick={handleNextPage}
+            disabled={!hasMoreBooks} 
             className={`${
               !hasMoreBooks ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
             } text-white font-semibold py-2 px-4 rounded-lg transition duration-300`}
@@ -199,8 +193,6 @@ const BookList = () => {
            <FaAngleRight />
           </button>
         </div>
-
-        {/* Edit Modal */}
         {isModalOpen && (
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
             <h2 className="text-xl font-semibold mb-4">Edit Book</h2>
@@ -233,6 +225,13 @@ const BookList = () => {
                 />
               </div>
               <div className="flex justify-between">
+              <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-lg"
+                >
+                  Cancel
+                </button>
                 <button
                   type="button"
                   onClick={handleUpdateBook}
@@ -240,13 +239,7 @@ const BookList = () => {
                 >
                   Update
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-lg"
-                >
-                  Cancel
-                </button>
+                
               </div>
             </form>
           </Modal>

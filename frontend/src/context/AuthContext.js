@@ -1,22 +1,21 @@
-// src/context/AuthContext.js
-import React, { createContext, useState } from 'react';
-import { setAuthToken } from '../services/api';  // Import setAuthToken function
+import React, { createContext, useState } from "react";
+import { setAuthToken } from "../services/api";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem('token'));  // Load token from localStorage
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const login = (token) => {
-    localStorage.setItem('token', token);  // Save token to localStorage
+    localStorage.setItem("token", token);
     setToken(token);
-    setAuthToken(token);  // Set the token globally for all requests
+    setAuthToken(token);
   };
 
   const logout = () => {
-    localStorage.removeItem('token');  // Remove token
+    localStorage.removeItem("token");
     setToken(null);
-    setAuthToken(null);  // Remove the token from axios headers
+    setAuthToken(null);
   };
 
   return (
