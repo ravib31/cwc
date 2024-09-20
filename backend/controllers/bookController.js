@@ -50,6 +50,7 @@ exports.getBooks = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 exports.getBookById = async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);

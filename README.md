@@ -103,3 +103,14 @@ DELETE	    /api/books/:id	Delete a book	                                        
   6. Run Frontend Server
   7. Access the Application
   8. Login & Registration
+
+
+8-Access the Application
+  Once both the backend and frontend servers are running, you can access the application in your browser:
+  Frontend: http://localhost:3000
+  Backend API (for testing): http://localhost:5000/api
+
+9-Login & Registration
+Register a new user by navigating to /register.
+After registration, log in with the credentials you used on the /login page.
+Once logged in, you will be redirected to the protected pages, where you can start managing your books.

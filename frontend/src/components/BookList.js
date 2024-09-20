@@ -18,7 +18,7 @@ const BookList = () => {
   const { logout } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
-  const [hasMoreBooks, setHasMoreBooks] = useState(true); // New state to track availability of more books
+  const [hasMoreBooks, setHasMoreBooks] = useState(true);
   const [totalBooks, setTotalBooks] = useState(0); 
   const [editFormData, setEditFormData] = useState({
     title: '',

@@ -41,6 +41,9 @@ const BookForm = () => {
     navigate("/");
   };
 
+  const className1 =
+    "w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent";
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
@@ -54,7 +57,7 @@ const BookForm = () => {
               value={formData.title}
               onChange={handleChange}
               placeholder="Title"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={className1}
               required
             />
           </div>
@@ -64,7 +67,7 @@ const BookForm = () => {
               value={formData.author}
               onChange={handleChange}
               placeholder="Author"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={className1}
               required
             />
           </div>
@@ -74,7 +77,7 @@ const BookForm = () => {
               value={formData.genre}
               onChange={handleChange}
               placeholder="Genre"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={className1}
               required
             />
           </div>
@@ -84,7 +87,7 @@ const BookForm = () => {
               name="publishedDate"
               value={formData.publishedDate}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={className1}
               required
             />
           </div>
